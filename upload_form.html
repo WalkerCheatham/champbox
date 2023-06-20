@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="./cboxlogo.PNG">
+    <link rel="stylesheet" href="./assets/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="./assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Upload Form</title>
+
+    <style>
+        body {
+            background-color: #020314;
+            width: auto;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-container input,
+        .form-container textarea,
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #205837;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .logo img {
+            width: 50%;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #205837;
+            color: #fff;
+            z-index: 100;
+        }
+
+        .menu-items {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: space-between;
+        }
+
+        .menu-items li {
+            margin: 0;
+        }
+
+        .menu-items li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            display: block;
+        }
+
+        .menu-items li a:hover {
+            background-color: #666;
+        }
+
+        .content {
+            margin-top: 50px;
+            padding: 0 15px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .drag-over {
+            background-color: #f7f7f7;
+        }
+
+        @media screen and (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <ul class="menu-items">
+            <li><a href="./index.php">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="./upload_form.html">Uploader</a></li>
+            <li><a href="./admin.php">Admin</a></li>
+        </ul>
+    </div>
+    <div class="form-container">
+        <header style="text-align: center;">
+            <a href="#" class="logo">
+                <img src="./cboxlogo.png" alt="">
+            </a>
+        </header>
+
+        <form method="POST" action="upload.php" enctype="multipart/form-data">
+            <h2>Champbox Content Loader</h2>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="summary">Summary:</label>
+            <textarea id="summary" name="summary"></textarea>
+
+            <label for="videoSrc">Video Source:</label>
+            <div id="videoDropZone" class="drop-zone">
+                <p>Drag and drop a video file here or click to browse</p>
+                <input type="file" id="videoSrc" name="episodeFile[]" accept="video/*" required multiple>
+            </div>
+
+            <label for="poster">Poster:</label>
+
+            <div id="posterDropZone" class="drop-zone">
+                <p>Drag and drop a poster image file here or click to browse</p>
+                <input type="file" id="poster" name="poster" accept="image/*">
+            </div>
+
+            <label for="backgroundImg">Background Image:</label>
+            <div id="backgroundImgDropZone" class="drop-zone">
+                <p>Drag and drop a background image file here or click to browse</p>
+                <input type="file" id="backgroundImg" name="backgroundImg" accept="image/*">
+            </div>
+
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+            </select>
+
+            <label for="genre">Genre:</label>
+            <select id="genre" name="genre" >
+                <option value="action">Action</option>
+                <option value="adventure">Adventure</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="horror">Horror</option>
+                <option value="romance">Romance</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="thriller">Thriller</option>
+            </select>
+
+            <div id="seasonNumberContainer" style="display: none;">
+                <label for="seasonNumber">Season Number:</label>
+                <input type="number" id="seasonNumber" name="seasonNumber" min="1">
+            </div>
+
+            <div id="episodeNumberContainer" style="display: none;">
+                <label for="episodeNumber">Episode Number:</label>
+                <input type="number" id="episodeNumber" name="episodeNumber[]" min="1">
+            </div>
+
+            <div id="episodeNameContainer" style="display: none;">
+                <label for="episodeName">Episode Name:</label>
+                <input type="text" id="episodeName" name="episodeName[]">
+            </div>
+
+            <div id="subtitleContainer" style="display: none;">
+                <label for="subtitle">Subtitle:</label>
+                <input type="file" id="subtitle" name="subtitle[]" accept=".srt" multiple>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+        <script src="./assets/jquery-3.7.0.js"></script>
+        <script src="./assets/bootstrap.bundle.min.js"></script>
+        <script>
+            // Show/hide fields based on the selected type
+            const typeSelect = document.getElementById('type');
+            const seasonNumberContainer = document.getElementById('seasonNumberContainer');
+            const episodeNumberContainer = document.getElementById('episodeNumberContainer');
+            const episodeNameContainer = document.getElementById('episodeNameContainer');
+            const subtitleContainer = document.getElementById('subtitleContainer');
+
+            typeSelect.addEventListener('change', function() {
+                if (this.value === 'series') {
+                    seasonNumberContainer.style.display = 'block';
+                    episodeNumberContainer.style.display = 'block';
+                    episodeNameContainer.style.display = 'block';
+                    subtitleContainer.style.display = 'block';
+                } else {
+                    seasonNumberContainer.style.display = 'none';
+                    episodeNumberContainer.style.display = 'none';
+                    episodeNameContainer.style.display = 'none';
+                    subtitleContainer.style.display = 'none';
+                }
+            });
+
+            // Drag and drop functionality
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            dropZones.forEach(dropZone => {
+                dropZone.addEventListener('dragover', handleDragOver);
+                dropZone.addEventListener('dragleave', handleDragLeave);
+                dropZone.addEventListener('drop', handleFileDrop);
+            });
+
+            function handleDragOver(event) {
+                event.preventDefault();
+                this.classList.add('drag-over');
+            }
+
+            function handleDragLeave(event) {
+                event.preventDefault();
+                this.classList.remove('drag-over');
+            }
+
+            function handleFileDrop(event) {
+                event.preventDefault();
+                this.classList.remove('drag-over');
+
+                const fileInput = this.querySelector('input[type="file"]');
+                const files = event.dataTransfer.files;
+
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    // Update the drop zone text or display file names
+                    // Example: this.querySelector('p').textContent = files[0].name;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
